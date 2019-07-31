@@ -91,6 +91,8 @@ int main(void) {
   printf("'%s'\n", get_ini_value(&parser, "Test2", "Int"));
   
 	printf("Test on file %s took %f for 60 queries\n", TEST_FILE, total_time);
+
+  unload_ini_file(&parser);
 	
   return 0;
 }

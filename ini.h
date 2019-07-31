@@ -27,6 +27,11 @@ bool load_ini_file(ini_parser* p, const char* path) {
   return true;
 }
 
+/* unload file */
+void unload_ini_file(ini_parser* p) {
+  fclose(p->file);
+}
+
 static bool parse_line(char* line, pair* c) {
   uint32_t equal_index = strchr(line, '=')-line;
   if (equal_index < 0) return false;
