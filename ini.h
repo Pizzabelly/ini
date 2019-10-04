@@ -1,4 +1,6 @@
-#pragma once
+#ifndef INI_H
+#define INI_H
+
 
 #define _CRT_SECURE_NO_WARNINGS
 #include <stdbool.h>
@@ -20,7 +22,7 @@ typedef struct {
 } ini_parser;
 
 /* loads the file at the given path into memory */
-bool load_ini_file(ini_parser* p, const char* path) {
+static bool load_ini_file(ini_parser* p, const char* path) {
   p->file = fopen(path, "r");
   if (p->file == NULL)
     return false;
@@ -105,4 +107,6 @@ char* get_ini_value(ini_parser* p, const char* sec, const char* key) {
   }
   free(current_section);
   return value;
-} 
+}
+
+#endif /* INI_H */
