@@ -80,7 +80,7 @@ char* get_ini_value(ini_parser* p, const char* sec, const char* key) {
   while (fgets(line, MAX_LINE_SIZE, p->file) != NULL) {
     size_t len = strlen(line);
     if (len < 3) continue;
-    char front = line[0];  // first character for the line
+    char front = *line;  // first character for the line
     if (front == ';' || front == '#' || front == '\n') continue;
     else if (front == '[') {
       line++;
@@ -94,12 +94,12 @@ char* get_ini_value(ini_parser* p, const char* sec, const char* key) {
     if (wait_till_next_section) continue;
     
     if (strcmp(current_section, sec) == 0) {
-      pair pa;
-      if (!parse_line(line, &pa))
+      pair p;
+      if (!parse_line(line, &p))
         continue;
-      if (strcmp(pa.key, key) == 0) {
-        strcpy(value, pa.value);
-        free(pa.key); free(pa.value);
+      if (strcmp(p.key, key) == 0) {
+        strcpy(value, p.value);
+        free(p.key); free(p.value);
         break;
       }
     } else wait_till_next_section = true;
