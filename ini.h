@@ -34,7 +34,7 @@ void unload_ini_file(ini_parser* p) {
 }
 
 static bool parse_line(char* line, pair* c) {
-  uint32_t equal_index = strchr(line, '=')-line;
+  int32_t equal_index = strchr(line, '=')-line;
   if (equal_index < 0) return false;
 
   size_t len = strlen(line);
@@ -100,12 +100,13 @@ char* get_ini_value(ini_parser* p, const char* sec, const char* key) {
       if (strcmp(p.key, key) == 0) {
         strcpy(value, p.value);
         free(p.key); free(p.value);
-        break;
+        free(current_section);
+        return value;
       }
     } else wait_till_next_section = true;
   }
   free(current_section);
-  return value;
+  return NULL;
 }
 
 #endif /* INI_H */
