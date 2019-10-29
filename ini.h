@@ -44,7 +44,7 @@ static bool parse_line(char* line, pair* c) {
   uint32_t key_start = 0; uint32_t value_start = 0;
   bool start_value = false; bool start_key = false;
   uint32_t prev_space = 0;
-  for (uint32_t i = 0; i < len - 1; i++) {
+  for (int32_t i = 0; i < len - 1; i++) {
     if (i < equal_index) {
       if (line[i] == ' ' && !prev_space) {
         prev_space = key_start;
