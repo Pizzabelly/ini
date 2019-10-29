@@ -73,7 +73,7 @@ char* get_ini_value(ini_parser* p, const char* sec, const char* key) {
 
   char* value = (char*)malloc(MAX_VALUE_SIZE);
 
-  char* current_section; 
+  char* current_section = "root"; 
   bool wait_till_next_section = true;
 
   char* line = (char*)malloc(MAX_LINE_SIZE);
